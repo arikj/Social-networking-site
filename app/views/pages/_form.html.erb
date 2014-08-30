@@ -1,0 +1,44 @@
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+        <%= form_for(@page) do |form|%>
+          <fieldset>
+          
+          <div class="form-group">
+               <label class="col-md-3 control-label" for="email">Title</label>
+                <div class="col-md-9">
+              <%= form.text_field :title,:class=>"form-control" %>
+             </div>
+            </div>
+          
+          <div class="form-group">
+                <label class="col-md-3 control-label" for="message">Description</label>
+                 <div class="col-md-9">
+                <%= form.text_area :description ,:class=>"form-control",:rows=>"5"%>
+            </div>
+            </div>
+          
+          
+          <div class="form-group">
+                <label class="col-md-3 control-label" for="message">Pic</label>
+                 <div class="col-md-9">
+          <%= form.file_field :timeline_pic %>
+          </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+           <%= form.submit 'Save',:class=>"btn btn-default btn-info btn-lg btn-block" %>
+           </div>
+            </div>
+
+          </fieldset>
+        <% end %>
+    </div>
+  </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,133 @@
+
+        
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/main/profile">Home</a>
+        </li>
+        <li>
+          <a href="#">Pages</a>
+        </li>
+        <li>
+          <a href="/main/friends">Friends</a>
+        </li>
+        <li>
+          <a href="#">Groups</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="masthead">  
+  <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Question and Answers
+            <p class="lead"></p>
+          </h1>
+        </div>
+        <div class="col-md-5">
+            <div class="well well-lg"> 
+              <div class="row">
+                <div class="col-sm-6">
+                  <% asked_by = User.find(@question.added_by) %>
+                  <a href= <%= "/main/profile?id="+asked_by.id.to_s %> > <%= image_tag  asked_by.profile_pic.url, :height => "100",:width => "100" %></a>
+                </div>
+                <div class="col-sm-6">
+                  <a href= <%= "/main/profile?id="+asked_by.id.to_s %> ><%= asked_by.fname + ' ' + asked_by.lname %></a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div> 
+  </div><!-- /cont -->
+</div>
+
+<!-- Begin Body -->
+<div class="container">
+  <div class="row">
+        <div class="col-md-3" id="leftCol">
+              
+                <ul class="nav nav-stacked" id="sidebar">
+                  <li><a href="#sec0">Question</a></li>
+                  <li><a href="#sec1">Answers</a></li>
+                </ul>
+              
+          </div>  
+          <div class="col-md-9">
+                <h2 id="sec0"><%= @question.title %></h2>
+                
+                
+                
+                <%= @question.content %>
+                <hr>
+                <%if @question.added_by.to_s == cookies[:user_id] %>
+                  <a href=<%= '/question/edit?id='+@question.id.to_s %> >Edit </a>
+                  <a href= <%= '/question/delete?id='+@question.id.to_s %> class="btn btn-default btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+
+
+                <% end %>
+                <hr>
+       
+                
+              
+              
+                <h2 id="sec1">Answers</h2>
+                
+                <div class="row">
+                  <% for answer in @answers %>
+                  <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <% answered_by = User.find(answer.added_by) %>
+                      <div class="panel-heading"><h3><%= answered_by.fname + ' ' +answered_by.lname %> </h3></div>
+                      <div class="panel-body">
+                          <%= answer.content %>
+                          
+                           
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <% end %> 
+                </div>
+              
+                <hr>
+              
+               <%= form_tag "/question/addAnswer" do %>
+    
+                    Your Answer:<br />
+                    
+                     <textarea id="text"  name="your_answer" rows="5" cols="80" class="required"></textarea>
+                   <br/>
+                  
+                   
+                    <input type="submit" value="SUBMIT"/>
+                    
+                <%end%>
+                
+              
+                <hr>
+              
+                
+                
+          </div> 
+    </div>
+</div>
+
+
+
+        
+         
+       
+   
